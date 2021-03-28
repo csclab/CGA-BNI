@@ -21,4 +21,6 @@ CGA-BNI is a promising and scalable tool to predict both the structure and the d
       
       + We could change the arguments as in the above figure
       
+- Results are stored in the project folder and named as **run1**, **run2**, ...
+- 
 - We are still updating the guide until 28/03 10:00AM. Thanks for your interests!
