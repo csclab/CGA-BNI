@@ -15,14 +15,21 @@ CGA-BNI is a promising and scalable tool to predict both the structure and the d
     
       + **path to data**: the path to the data folder containing DREAM3, random networks, and the large-scale E.coli datasets. We could make another dataset by making another dataset folder and chaning the source codes a little similar to the way of the large-scale Ecoli dataset.
       + **type of data**: **"dream"**, **"rbn"**, and **"ecoli"** correspond to DREAM3, random networks, and the large-scale Ecoli dataset, respectively
-      + number of trials: repeat the experiment a number of times to get avergage results
+      + **number of trials**: repeat the experiment a number of times to get avergage results
 
     - Right-click in the project, choose menu **Properties -> Run**
       ![Project default configuration](/images/cga1.png)
       
       + We could change the arguments as in the above figure
+
+    - Some examples of arguments:
+      + E:\\CGA_BNI\\data\\ dream 1
+      + E:\\CGA_BNI\\data\\ rbn 50
+      + E:\\CGA_BNI\\data\\ ecoli 20
       
 - Results are stored in the project folder and named as **run1**, **run2**, ...
+
+## Contacts 
 
 Contact us: trinhhungcuong@tdtu.edu.vn
 
