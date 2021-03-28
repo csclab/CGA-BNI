@@ -17,6 +17,7 @@ CGA-BNI is a promising and scalable tool to predict both the structure and the d
       + number of trials: repeat the experiment a number of times to get avergage results
 
     - Right-click in the project, choose menu **Properties -> Run**
+      ![Project default configuration](/images/cga1.png)
       
       + We could change the arguments as in the above figure
       
