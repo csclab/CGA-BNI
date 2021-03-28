@@ -5,14 +5,17 @@
             <url>src/bni/InferBN.java</url>
             <bookmark id="1">
                 <name/>
-                <line>513</line>
+                <line>552</line>
                 <key/>
             </bookmark>
             <bookmark id="2">
                 <name/>
-                <line>928</line>
+                <line>967</line>
                 <key/>
             </bookmark>
         </file>
     </editor-bookmarks>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
+        <file>file:/D:/HCStore/Projects/JAVA/InferBN/src/bni/InferBN.java</file>
+    </open-files>
 </project-private>
