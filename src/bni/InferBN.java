@@ -44,14 +44,14 @@ public class InferBN {
     public static final int BA_EDGE_TO_ADD = 1;
     public static final double BA_PROBABILITY = 0.5;
     
-    public static final boolean MODE_STRICT = true;//Ecoli//    false;//RBN//  false;//DREAM3//  
-    public static final int OFFSET_COL_EXP_DATA = 2;//Ecoli//   1;//DREAM3//  
+    public static boolean MODE_STRICT = false;//DREAM3//    true;//Ecoli//            false;//RBN//    
+    public static int OFFSET_COL_EXP_DATA = 1;//DREAM3//  2;//Ecoli//     
     public static final boolean STAT_IGNORE_SIGN = true;
-    public static final boolean TF_TG_CORR_DIFF_SAMESIGN = !true;//RBN//  !true;//Ecoli//  true;//DREAM3//  
+    public static boolean TF_TG_CORR_DIFF_SAMESIGN = !true;//RBN//  !true;//Ecoli//  true;//DREAM3//  
 //    public static final boolean TF_TG_FIX_INDIRECT = true;
     
     public static final double GENE_CORREL_THRESH_MIN = 0.1;
-    public static final double GENE_CORREL_THRESH_MID = 0.05;//Ecoli//  0.25;//RBN//  0.5;//DREAM3//    
+    public static double GENE_CORREL_THRESH_MID = 0.25;//RBN//    0.05;//Ecoli//    0.5;//DREAM3//    
     public static final double GENE_CORREL_THRESH_MAX = 0.89;
     
     public static final double SCORE_PRECISION = Math.pow(10, -3);
@@ -75,7 +75,7 @@ public class InferBN {
     public static final int GNW = 1;
     public static final int ECOLI = 2;
     public static final int RBN = 3;
-    public static final int DATABASE = RBN;
+    public static int DATABASE = RBN;
     
     public static final int[] DREAM3_SIZE_NO = {
         10, 50, 100
@@ -92,15 +92,15 @@ public class InferBN {
         40, 200, 600
     };
     
-    public static final String DIR_BASE = "D:\\HCStore\\Papers\\InferGA_Manuscript\\data\\";
-    public static final String DIR_DATA = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\DREAM3 data\\";
-    public static final String FILE_KO = "InSilico__DREAM_SIZE__-__DREAM_SPECIES__-null-mutants.tsv.bool.csv";
-    public static final String FILE_NET = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\Networks\\InSilico__DREAM_SIZE__-__DREAM_SPECIES__.tsv";    
+    public static String DIR_BASE = "D:\\HCStore\\Papers\\InferGA_Manuscript\\data\\";
+    public static String DIR_DATA = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\DREAM3 data\\";
+    public static String FILE_KO = "InSilico__DREAM_SIZE__-__DREAM_SPECIES__-null-mutants.tsv.bool.csv";
+    public static String FILE_NET = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\Networks\\InSilico__DREAM_SIZE__-__DREAM_SPECIES__.tsv";    
         
     //--- E. coli section (M3D & regulonDB)
-    public static final String E_COLI_DIR = DIR_BASE + "Inference\\E_coli_v4_Build_6\\";
-    public static final String E_COLI_FILE = "E_coli_v4_Build_6_exps466_ko.csv.bool.csv";
-    public static final String E_COLI_NET = E_COLI_DIR + "network\\E_coli_M3D_RegulonDB.txt";
+    public static String E_COLI_DIR = DIR_BASE + "Inference\\E_coli_v4_Build_6\\";
+    public static String E_COLI_FILE = "E_coli_v4_Build_6_exps466_ko.csv.bool.csv";
+    public static String E_COLI_NET = E_COLI_DIR + "network\\E_coli_M3D_RegulonDB.txt";
     public static final int E_COLI_NO_GENES = 925;  //947;  //1424;
     public static final int E_COLI_MAX_NO_EDGES = 3200;
     
@@ -114,17 +114,56 @@ public class InferBN {
     };
     
     //--- RBN section
-    public static final String DIR_RBN = DIR_BASE + "Inference\\RBN_data\\";
+    public static String DIR_RBN = DIR_BASE + "Inference\\RBN_data\\";
     
     
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        dream3();
         
+        for(int i=0; i < args.length; i++) {
+        
+            System.out.println(args[i]);
+        }
+        
+        DIR_BASE = args[0];
+        DIR_DATA = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\DREAM3 data\\";
+        FILE_KO = "InSilico__DREAM_SIZE__-__DREAM_SPECIES__-null-mutants.tsv.bool.csv";
+        FILE_NET = DIR_BASE + "Inference\\DREAM3 in silico challenge\\__DREAM_SIZE__\\Networks\\InSilico__DREAM_SIZE__-__DREAM_SPECIES__.tsv";    
+
+        //--- E. coli section (M3D & regulonDB)
+        E_COLI_DIR = DIR_BASE + "Inference\\E_coli_v4_Build_6\\";
+        E_COLI_FILE = "E_coli_v4_Build_6_exps466_ko.csv.bool.csv";
+        E_COLI_NET = E_COLI_DIR + "network\\E_coli_M3D_RegulonDB.txt";
+        
+        DIR_RBN = DIR_BASE + "Inference\\RBN_data\\";
+    
+        String typeExperiment = args[1];
+        int noTrials = Integer.valueOf(args[2]);
+        
+        if(typeExperiment.equalsIgnoreCase("ecoli")) {
+            MODE_STRICT = true;
+            OFFSET_COL_EXP_DATA = 2;
+            GENE_CORREL_THRESH_MID = 0.05;
+            DATABASE = ECOLI;
+        }
+        
+        if(typeExperiment.equalsIgnoreCase("dream")) {
+            TF_TG_CORR_DIFF_SAMESIGN = true;
+            GENE_CORREL_THRESH_MID = 0.5;
+            DATABASE = DREAM3;
+        }
+        
+        if(typeExperiment.equalsIgnoreCase("rbn")) {
+            OFFSET_COL_EXP_DATA = 2;
+            DATABASE = RBN;
+        }
+        
+        
+        execute(noTrials);
     }
     
-    public static void dream3() throws FileNotFoundException, InterruptedException {
+    public static void execute(int noTrials) throws FileNotFoundException, InterruptedException {
         
-        for(int run = 1; run <= 1; ++run) {
+        for(int run = 1; run <= noTrials; ++run) {
             File theDir = new File("run" + run + "\\");
             
             if (!theDir.exists()) {
