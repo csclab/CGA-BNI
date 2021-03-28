@@ -7,6 +7,7 @@ CGA-BNI is a promising and scalable tool to predict both the structure and the d
 - Install Java SE Development Kit, recommended version is 8 (from https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html). We are using the java version "1.8.0_171"
 - Install NetBeans IDE, recommeded version is above 7.3 (from https://www.oracle.com/technetwork/java/javase/downloads/jdk-netbeans-jsp-3413139-esa.html)
 - Download this project into a folder, for example, "**CGAProj**"
+- Extract all **.zip files** in the **/data/Inference** folder
 - Open the project by NetBeans IDE, and open the file "**InferBN.java**":
   - The **main** function, and also inference funtions is in this Java file
   - Build and run the project with the **default config**:
@@ -22,5 +23,9 @@ CGA-BNI is a promising and scalable tool to predict both the structure and the d
       + We could change the arguments as in the above figure
       
 - Results are stored in the project folder and named as **run1**, **run2**, ...
-- 
-- We are still updating the guide until 28/03 10:00AM. Thanks for your interests!
+
+Contact us: trinhhungcuong@tdtu.edu.vn
+
+Thanks for your interests!
+
+
